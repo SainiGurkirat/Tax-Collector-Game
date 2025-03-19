@@ -1,32 +1,47 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Collections;
+
 
 public class TaxCollectorGame {
 
 
     public static void main(String[] args){
 
-        displayBoxes(100);
+        int[] test = {100, 99, 98, 96, 94};
+
+        int[] test1 = taxCollectorChoice(test);
+
+        displayBoxes(100, test1, test);
+        
+        for(int i: test1){
+            System.out.println("\n" + i);
+        }
+    }
+//player score
+private static int calculatePlayerScore(int[] numbers) {
+        int totalscore = 0;
+        for (int number : numbers) {
+            totalscore += number;
+        }
+        return totalscore;
+    }
+// tax score
+    private static int calculateTaxscore(int[] taxnumbers) {
+        int taxtotalscore = 0;
+        for (int number : taxnumbers) {
+            taxtotalscore += number;
+        }
+        return taxtotalscore;
     }
 
 //finding factors of a number 
-public static int[] findFactors(int number){
-         int count = 0;
-        for (int i = 1; i <= number; i++) {
-            if (number % i == 0) {
-                count++;
-            }
-        }
-
-        int[] factorsArray = new int[count];
-        int index = 0;
+public static Set<Integer> getFactors(int number){
+    
+        Set<Integer> factorsArray = new HashSet<>();
 
         for (int i = 1; i <= number; i++) {
             if (number % i == 0) {
-                factorsArray[index++] = i;
+                factorsArray.add(i);
             }
         }
 
@@ -37,10 +52,23 @@ public static int[] findFactors(int number){
    
     
     //gets info from board and takes remaining factors based of user's choice
-    private int[] taxCollectorChoice(int[] usersChoices) {
-    
+    private static int[] taxCollectorChoice(int[] usersChoices) {
+        Set<Integer> taxCollectorChoices = new HashSet<>();
+
+        //Find all factors from the array
+        for(int num: usersChoices){
+            taxCollectorChoices.addAll(getFactors(num));
+            
+        }
+
+        // Convert the set to an array
+        int[] result = new int[taxCollectorChoices.size()];
+        int index = 0;
+        for (int factor : taxCollectorChoices) {
+            result[index++] = factor;
+        }
        
-        return usersChoices; 
+        return result; 
     }
 
     
@@ -56,10 +84,8 @@ public static int[] findFactors(int number){
 
 
     // prints a string of all the possible option
-    private static void displayBoxes(int ceilingNumber){
+    private static void displayBoxes(int ceilingNumber, int[] taxCollectorChoices, int[] usersChoices){
 
-
-        int section = 1;
         for(int i = 1; i <= ceilingNumber; i++){
             
     
@@ -72,14 +98,18 @@ public static int[] findFactors(int number){
                 System.out.println();
             }
             
+            // when users choice equals the index prints out an "O" and continue to the next index
+            boolean O = false;
+            for(int usersChoice: usersChoices){
+                if(usersChoice == i){
+                    System.out.print("| O |");
+                    O = true;
+                }
+            }
             
-             //prints middle of box
-             if(i < 10){
-                System.out.print("| " + i + " |");
-             }else System.out.print("| " + i + "|");
-            
-             if(i == ceilingNumber){
 
+            // When the index reaches the end, print out the final set of lines at the bottom
+            if(i == ceilingNumber){
                 int numbersLeft = ceilingNumber%10;
 
                 if(numbersLeft == 0) numbersLeft = 10;
@@ -89,15 +119,30 @@ public static int[] findFactors(int number){
                     System.out.print("+===+");
                 }
              }
-        }
-    
 
-            
-            
+            if(O == true) continue;
+            // when users tax collectors choice equals the index prints out an "X" and continue to the next index
+            boolean x = false;
+            for(int taxChoice: taxCollectorChoices){
+                if(taxChoice == i){
+                    System.out.print("| X |");
+                    x = true;
+                }
+            }
+            if(x == true) continue;
 
+
+             //if neither tax collector choice or user choice was in the index it shuld print out the index number
+             if(i < 10){
+                System.out.print("| " + i + " |");
+             }else {
+                // fixes padding on the box when number is 2 digits big
+                System.out.print("| " + i + "|");
+            }
             
-            
+             
         }
-    private static int CalculatePlayerScore(int )
+   
+        }
     }
 
