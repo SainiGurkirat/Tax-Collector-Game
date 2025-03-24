@@ -18,7 +18,7 @@ private static Scanner scanner = new Scanner(System.in);
                 ceilingNumber = scanner.nextInt();
                 scanner.nextLine();
 
-                if (ceilingNumber > 0 && ceilingNumber < 100) {
+                if (ceilingNumber > 0 && ceilingNumber <= 100) {
                     break; 
                 } else {
                     System.out.print("Please enter a number between 1 and 100: ");
@@ -112,7 +112,7 @@ private static Scanner scanner = new Scanner(System.in);
                 factorsArray.add(i);
             }
         }
-
+        
         return factorsArray;
     }
        
@@ -121,21 +121,39 @@ private static Scanner scanner = new Scanner(System.in);
     
     //gets info from board and takes remaining factors based of user's choice
     private static int[] taxCollectorChoice(int[] usersChoices) {
-        Set<Integer> taxCollectorChoices = new HashSet<>();
+        Set<Integer> allFactors = new HashSet<>();
+        Set<Integer> newTaxCollectorChoices = new HashSet<>();
 
         //Find all factors from the array
         for(int num: usersChoices){
-            taxCollectorChoices.addAll(getFactors(num));
-            
+            allFactors.addAll(getFactors(num));
+        }
+
+        for(int num: allFactors){
+            // Make sure any duplicate values and values already taken by user get removed
+            boolean isDuplicate  = false; 
+
+            for(int userNum: usersChoices){
+                if(userNum == num) isDuplicate = true;
+            }
+           
+            if(!isDuplicate){
+                newTaxCollectorChoices.add(num);
+            }
         }
 
         // Convert the set to an array
-        int[] result = new int[taxCollectorChoices.size()];
+        int[] result = new int[newTaxCollectorChoices.size()];
         int index = 0;
-        for (int factor : taxCollectorChoices) {
-            result[index++] = factor;
+        for (int factor : newTaxCollectorChoices) {
+            
+            
+            
+            result[index] = factor;
+            index++;
         }
-       
+        
+        
         return result; 
     }
 
@@ -160,11 +178,11 @@ private static Scanner scanner = new Scanner(System.in);
             displayBoxes(ceilingNumber, taxCollectorChoices, usersChoices);
             usersChoices = pickNumber(taxCollectorChoices, usersChoices);
             taxCollectorChoices = taxCollectorChoice(usersChoices);
-            
+    
             playerScore = calculatePlayerScore(usersChoices);
             taxCollectorScore = calculateTaxscore(taxCollectorChoices);
 
-            if(((taxCollectorChoices.length + usersChoices.length) - 2) == ceilingNumber) {
+            if((taxCollectorChoices.length + usersChoices.length) == ceilingNumber) {
                 break;
             }
         }
