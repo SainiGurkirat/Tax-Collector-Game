@@ -6,6 +6,43 @@ import java.util.Arrays;
 public class TaxCollectorGame {
 
 private static Scanner scanner = new Scanner(System.in);
+    public static void testCalculatePlayerScore(){
+        // test case 1, Gurkirat
+        int[] testUserScore1 = {100, 50, 63};
+        int test1 = calculatePlayerScore(testUserScore1);
+
+        if(test1 == 213){
+            System.out.println("Test 1 Passed.");
+        } else System.out.println("Test 1 Failed.");
+
+        // test case 2, Gurkirat 
+        int[] testUserScore2 = {42, 78, 9, 51, 63, 34, 89, 17, 56, 3};
+        int test2 = calculatePlayerScore(testUserScore2);
+
+        if(test2 == 442){
+            System.out.println("Test 2 Passed.");
+        } else System.out.println("Test 2 Failed.");
+
+        //test case 3, lenard 
+        int[] testCase3 = {25,31,5,6,9};
+        int testResult3 = calculatePlayerScore(testCase3);
+        if (testResult3 == 76) {
+            System.out.println("Test 3 Passed");
+
+        } else{
+            System.out.println("Test 3 failed");
+        }
+
+        //test case 4, lenard 
+        int [] testCase4 = {16,24,32,48,56};
+        int testResult4 = calculatePlayerScore(testCase4);
+        if (testResult4 == 176) {
+            System.out.println("test 4 Passed" );
+
+        } else {
+            System.out.println("Test 4 failed");
+        }
+    }
 
     public static void testTaxCollectorsChoice(){
         // test case 1, Gurkirat
@@ -75,8 +112,46 @@ private static Scanner scanner = new Scanner(System.in);
         }else System.out.println("Test 4 Failed.");
     }
     public static void testGetFactors(){
+        //test case 1, simar
+        Set<Integer> test1 = getFactors(16);
+        Set<Integer> output1 = new HashSet<>(Arrays.asList(1, 2, 4, 8, 16));
+        
+        if (test1.equals(output1)) {
+            System.out.println("Test 1 passed.");
+        } else {
+            System.out.println("Test 1 failed.");
+        }
+        
+        //test case 2, simar
+        Set<Integer> test2 = getFactors(7);
+        Set<Integer> output2 = new HashSet<>(Arrays.asList(1, 7));
+        
+        if (test2.equals(output2)) {
+            System.out.println("Test 2 passed.");
+        } else {
+            System.out.println("Test 2 failed.");
+        }
 
-    }
+        //test case 3, lenard
+        Set<Integer> test3 = getFactors(100);
+        Set<Integer> output3 = new HashSet<>(Arrays.asList(1,2,4,5,10,20,25,50,100));
+         if (test3.equals(output3)) {
+            System.out.println("Test 3 passed.");
+        } else {
+            System.out.println("Test 3 failed.");
+        }
+
+        //test case 4, lenard 
+        Set<Integer> test4 = getFactors(73);
+        Set<Integer> output4 = new HashSet<>(Arrays.asList(1,73));
+         if (test4.equals(output4)) {
+            System.out.println("Test 4 passed.");
+        } else {
+            System.out.println("Test 4 failed.");
+        }
+        
+        }
+    
     public static void testIsgamewon(){
         //test case 1, Gurkirat 
         boolean test1 = isGameWon(100, 50);
@@ -90,99 +165,79 @@ private static Scanner scanner = new Scanner(System.in);
             System.out.println("Test 2 passed.");
         }else System.out.print("Test 2 failed.");
         
+        //test case 3, simar
+        boolean test3 = isGameWon(0,0);
+        if(test3 == false) {
+             System.out.println("Test 3 passed.");
+        }else System.out.print("Test 3 failed.");
+        
+        //test case 4, simar
+        boolean test4 = isGameWon(-10,10);
+        if(test4 == false){
+                System.out.println("Test 4 passed.");
+        }else System.out.print("Test 4 failed.");
         
     }
     
     public static void testCalculateTaxScore() {
         System.out.println("Tax Score Testing");
-        
-        //test case 1
-        int[] myValues = {1,2,3,4,5};
-        int result = calculateTaxscore(myValues);
-        System.out.println(result);
+        //testing by lenard
+        //test case 1 lenard
+        int[] testCase1 = {1,2,3,4,5};
+        int testResult1 = calculateTaxscore(testCase1);
+        System.out.println(testResult1);
         //test 1 should have 15 tax score
-        if (result == 15) {
-            System.out.println("test passed");
+        if (testResult1 == 15) {
+            System.out.println("test 1 passed");
 
         } else {
-            System.out.println("test failed");
+            System.out.println("test 1 failed");
         }
         
         
-        //test case 2
-        //int[] myValues= {0,5,10,15,20};
-        //int result = calculateTaxscore(myValues);
-        //System.out.println(result);
+        //test case 2 lenard
+        int[] testCase2= {0,5,10,15,20};
+        int testResult2 = calculateTaxscore(testCase2);
+        System.out.println(testResult2);
         //should get 50 tax score
-        //if (result == 50) {
-            //System.out.println("test passed");
+        if (testResult2 == 50) {
+            System.out.println("test 2 passed");
 
-        //} else {
-            //System.out.println("test failed");
-        //}
+        } else {
+            System.out.println("test 2 failed");
+        }
         
-        //test case 3
-        //int[] myValues = {0};
-        //int result = calculateTaxscore(myValues);
-        //System.out.println(result);
+        //test case 3 lenard
+        int[] testCase3 = {0};
+        int testResult3 = calculateTaxscore(testCase3);
+        System.out.println(testResult3);
         //should get 0 tax score
-        //if (result == 0) {
-            //System.out.println("test passed");
+        if (testResult3== 0) {
+            System.out.println("test 3 passed");
 
-        //} else {
-            //System.out.println("test failed");
-        //}
+        } else {
+            System.out.println("test 3 failed");
+        }
         
-        //test case 4
-        //int[] myValues = {2,4,6,8,10};
-        //int result = calculateTaxscore(myValues);
-        //System.out.println(result);
+        //test case 4 lenard
+        int[] testCase4 = {2,4,6,8,10};
+        int testResult4 = calculateTaxscore(testCase4);
+        System.out.println(testResult4);
         //should get 30 tax score
-        //if (result == 30) {
-            //System.out.println("test passed");
+        if (testResult4 == 30) {
+            System.out.println("test 4 passed");
 
-        //} else {
-            //System.out.println("test failed");
-        //}
+        } else {
+            System.out.println("test 4 failed");
+        }
          
     }
     
-    public static void testPlayerScore(){
-        System.out.println("Player Score Testing");
-
-        //test case 1
-        int[] myValues = {1,2,3,4,5};
-        int result = calculatePlayerScore(myValues);
-        System.out.println(result);
-        //should get 15 player score
-        if (result == 15) {
-            System.out.println
-        }
-        
-
-        //test case 2
-        //int[] myValues = {0,2,4,6,8};
-        //System.out.println(result);
-        //should get 20 player score
-
-        //test case 3
-        //int[] myValues ={25,31,5,6,9};
-        //int result = calculatePlayerScore(myValues);
-        //System.out.println(result);
-        //should get 76 player score 
-
-        //test case 4
-        //int[] myValues ={16,24,32,48,56};
-        //int result = calculatePlayerScore(myValues);
-        //System.out.println(result)
-        
-    }
     
     private static int ceilingNumber = 10; 
     public static void main(String[] args){
-        testTaxCollectorsChoice();
         //making user call ceiling number, call game func with ceiling # (1-100)
-        System.out.print("Welcome to Tax Game \n\nRules: Pick numbers from the list to add to your score. If you pick a number that divides other numbers in the list, the Tax Collector earns those numbers. The game ends when all numbers are picked or taxed. The player with the highest score wins!");
+        System.out.print("Welcome to Tax Game \n\nRules: Pick numbers from the list to add to your score. If you pick a number that divides other numbers in the list, the Tax Collector earns those numbers. The game ends when all numbers are picked or taxed. The player with the highest score wins!\nUser Choice: O\nTax Collector Choice: X");
 
         System.out.print("\n\nEnter Your Ceiling Number: ");
         
@@ -320,8 +375,7 @@ private static Scanner scanner = new Scanner(System.in);
         int index = 0;
         for (int factor : newTaxCollectorChoices) {
             
-            
-            
+    
             result[index] = factor;
             index++;
         }
@@ -365,7 +419,7 @@ private static Scanner scanner = new Scanner(System.in);
             System.out.println("You won by " + (playerScore - taxCollectorScore) + " points!");
             
         } else {
-            System.out.println("You lost by " + (taxCollectorScore - playerScore));
+            System.out.println("You lost by " + (taxCollectorScore - playerScore) + " points");
         }
         
     }
@@ -375,9 +429,8 @@ private static Scanner scanner = new Scanner(System.in);
     private static void displayBoxes(int ceilingNumber, int[] taxCollectorChoices, int[] usersChoices){
 
         for(int i = 1; i <= ceilingNumber; i++){
-            
-    
-            //prints new line every 5 box's
+
+            //prints new line every 10 box's
             if(i % 10 == 1){
                 System.out.println();
                 for(int s = 0; s < 10; s++){
